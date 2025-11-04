@@ -1,0 +1,11 @@
+
+{
+  "hosting": {
+    "public": "insignias_globales/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
