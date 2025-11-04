@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏅 Mis Insignias - Misión Global</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        .badge-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .badge-card:hover {
+            transform: translateY(-5px);
+        }
+        .badge-image {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+        }
+        .badge-image.locked {
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header y Navegación -->
+        <header class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-2">
+                <img src="/assets/badges/embajador.png" alt="UNINÚÑEZ Logo" class="h-12">
+                <h1 class="text-2xl font-bold text-gray-800">Misión Global</h1>
+            </div>
+            <button onclick="auth.signOut()" class="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600">Cerrar sesión</button>
+        </header>
+
+        <nav class="bg-white rounded-lg shadow-sm mb-8 p-2 flex justify-center gap-4">
+            <a href="dashboard.html" class="px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-md">🏠 Inicio</a>
+            <a href="dashboard.html" class="px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-md">🗺️ Misiones</a>
+            <a href="insignias.html" class="px-4 py-2 text-blue-600 font-bold border-b-2 border-blue-600">🏅 Insignias</a>
+            <a href="#" class="px-4 py-2 text-gray-600 font-medium hover:bg-gray-100 rounded-md">🏆 Ranking</a>
+        </nav>
+        
+        <!-- Galería de Insignias -->
+        <div>
+            <h2 class="text-2xl font-bold mb-2 text-gray-800">Galería de Insignias</h2>
+            <p class="text-gray-600 mb-6">Estas son las insignias que puedes ganar. ¡Completa misiones para desbloquearlas todas!</p>
+            <div id="badges-gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Las insignias se insertarán aquí dinámicamente -->
+            </div>
+        </div>
+        
+        <footer class="text-center text-sm text-gray-500 mt-12">
+            © 2025 Corporación Universitaria Rafael Núñez - Facultad de Ingeniería | Insignias Globales desde la Gamificación
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="profile.js"></script>
+    <script src="badges-ui.js"></script>
+
+</body>
+</html>

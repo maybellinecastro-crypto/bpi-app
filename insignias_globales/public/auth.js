@@ -12,8 +12,16 @@ async function registerUser() {
   if (!name || !email || !password) return showMessage("Completa todos los campos");
 
   try {
+    // 1. Crear el usuario en Auth
     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
     const user = userCredential.user;
+
+    // 2. Guardar el nombre en el perfil de Auth (Mejora)
+    await user.updateProfile({
+      displayName: name
+    });
+
+    // 3. Crear el documento de perfil en Firestore
     await db.collection("users").doc(user.uid).set({
       name: name,
       email: email,
@@ -22,9 +30,14 @@ async function registerUser() {
       badges: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
-    window.location.href = "dashboard.html";
+
+    showMessage("¡Usuario creado con éxito! Redirigiendo...", false);
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 2000);
+
   } catch (error) {
-    console.error(error);
+    console.error("Error detallado en registro:", error);
     showMessage("Error: " + (error.message || "Registro fallido"));
   }
 }
@@ -34,6 +47,8 @@ async function loginUser() {
   const password = document.getElementById('loginPassword').value;
 
   if (!email || !password) return showMessage("Completa todos los campos");
+
+  showMessage("Iniciando sesión...", false);
 
   try {
     await auth.signInWithEmailAndPassword(email, password);
@@ -46,9 +61,9 @@ async function loginUser() {
 
 // Redirigir si ya está logueado
 auth.onAuthStateChanged(user => {
-  if (user && window.location.pathname === '/dashboard.html') {
-    // Ya en dashboard, ok
-  } else if (user) {
+  const isLoginPage = window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html');
+  
+  if (user && isLoginPage) {
     window.location.href = "dashboard.html";
   }
 });
