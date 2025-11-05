@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "insignias_globales/server.js", "use": "@vercel/node" },
+    { "src": "insignias_globales/public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/insignias_globales/server.js" }
+  ]
+}
