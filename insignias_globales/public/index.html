@@ -3,93 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> Misión Global Núñista</title>
+  <title>Misión Global Núñista</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #FF7A00;
-      --secondary: #009688;
-      --light: #f8f9fa;
-      --dark: #212529;
-    }
-    body {
-      background: linear-gradient(135deg, #fff 0%, #eef2f5 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .btn-primary {
-      background-color: var(--primary);
-      color: white;
-      border-radius: 8px;
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-    .btn-primary:hover {
-      background-color: #e66d00;
-      transform: translateY(-1px);
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .logo {
-      max-width: 300px;
-      height: auto;
-    }
+    body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+    .btn-primary { background-color: #FF7A00; color: white; transition: background-color 0.3s; }
+    .btn-primary:hover { background-color: #e66d00; }
+    .form-container { max-width: 400px; margin: auto; padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-    <!-- Logo -->
-    <div class="logo-container">
-      <img src="/assets/images/logo-uninunez.png" alt="UNINÚÑEZ Logo" class="logo">
+<body class="min-h-screen flex items-center justify-center">
+
+  <div class="form-container w-full">
+    
+    <div class="text-center mb-8">
+      <img src="/assets/images/logo-uninunez.jpg" alt="UNINÚÑEZ Logo" class="w-32 mx-auto mb-4">
+      <h1 class="text-2xl font-bold text-gray-800">🚀 ¡Inicia tu Misión Global!</h1>
     </div>
 
-    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">🚀 ¡Inicia tu Misión Global!</h1>
-
-    <!-- Registro -->
-    <div id="registerSection">
-      <h2 class="text-lg font-semibold mb-3">Crear cuenta</h2>
-      <input id="regName" type="text" placeholder="Nombre completo" class="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"/>
-      <input id="regEmail" type="email" placeholder="Correo institucional" class="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"/>
-      <input id="regPassword" type="password" placeholder="Contraseña" class="w-full p-2 mb-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"/>
-      <button onclick="registerUser()" class="btn-primary w-full">Registrar como Agente Global</button>
-      <p class="text-center mt-4">
-        ¿Ya tienes cuenta? <button onclick="showLogin()" class="text-orange-600 underline font-medium">Inicia sesión</button>
+    <!-- Sección de Inicio de Sesión -->
+    <div id="loginSection">
+      <h2 class="text-xl font-semibold mb-4 text-gray-700">Iniciar sesión</h2>
+      <input id="loginEmail" type="email" placeholder="Correo institucional" class="w-full p-3 mb-3 border rounded-lg focus:ring-2 focus:ring-orange-500"/>
+      <input id="loginPassword" type="password" placeholder="Contraseña" class="w-full p-3 mb-4 border rounded-lg focus:ring-2 focus:ring-orange-500"/>
+      <button id="loginButton" class="btn-primary w-full py-3 rounded-lg font-semibold">Entrar a mi Misión</button>
+      <p class="text-center mt-4 text-sm">
+        ¿Nuevo aquí? 
+        <button id="showRegisterButton" class="text-orange-600 hover:underline font-medium">Regístrate</button>
       </p>
     </div>
 
-    <!-- Login -->
-    <div id="loginSection" class="hidden">
-      <h2 class="text-lg font-semibold mb-3">Iniciar sesión</h2>
-      <input id="loginEmail" type="email" placeholder="Correo institucional" class="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"/>
-      <input id="loginPassword" type="password" placeholder="Contraseña" class="w-full p-2 mb-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"/>
-      <button onclick="loginUser()" class="btn-primary w-full">Entrar a mi Misión</button>
-      <p class="text-center mt-4">
-        ¿Nuevo aquí? <button onclick="showRegister()" class="text-orange-600 underline font-medium">Regístrate</button>
-      </p>
+    <!-- Sección de Registro -->
+    <div id="registerSection" class="hidden">
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Crear cuenta</h2>
+        <input id="regName" type="text" placeholder="Nombre completo" class="w-full p-3 mb-3 border rounded-lg focus:ring-2 focus:ring-orange-500"/>
+        <input id="regEmail" type="email" placeholder="Correo institucional" class="w-full p-3 mb-3 border rounded-lg focus:ring-2 focus:ring-orange-500"/>
+        <input id="regPassword" type="password" placeholder="Contraseña (mín. 6 caracteres)" class="w-full p-3 mb-4 border rounded-lg focus:ring-2 focus:ring-orange-500"/>
+        <button id="registerButton" class="btn-primary w-full py-3 rounded-lg font-semibold">Registrar como Agente Global</button>
+        <p class="text-center mt-4 text-sm">
+            ¿Ya tienes cuenta? 
+            <button id="showLoginButton" class="text-orange-600 hover:underline font-medium">Inicia sesión</button>
+        </p>
     </div>
 
-    <p id="message" class="text-red-500 text-sm mt-3 text-center"></p>
+    <p id="message" class="text-red-500 text-sm mt-4 text-center h-4"></p>
+
   </div>
 
-  <script>
-    function showLogin() {
-      document.getElementById('loginSection').classList.remove('hidden');
-      document.getElementById('registerSection').classList.add('hidden');
-    }
-    function showRegister() {
-      document.getElementById('registerSection').classList.remove('hidden');
-      document.getElementById('loginSection').classList.add('hidden');
-    }
-  </script>
-  <script src="auth.js"></script>
+  <!-- Scripts de Firebase y lógica de la aplicación -->
+  <script src="firebase-config.js"></script>
+  <script src="auth-manager.js"></script> 
+  <script src="login.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seed Missions to Firestore</title>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <h1>Actualizando la base de datos de misiones...</h1>
+    <p>Abre la consola del desarrollador (F12) para ver el progreso. Cierra esta ventana cuando veas el mensaje de éxito.</p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const db = firebase.firestore();
+            console.log("Firestore inicializado para la actualización.");
+
+            // Datos correctos de las misiones, basados en tu diseño y archivos.
+            const missions = [
+                {
+                    id: "explorador-global",
+                    name: "Explorador Global",
+                    description: "Participar en actividades introductorias para conocer la política de internacionalización.",
+                    xp: 50,
+                    category: "Gobernanza",
+                    badgeUrl: "/assets/badges/explorador_global.jpeg"
+                },
+                {
+                    id: "investigador-colaborador",
+                    name: "Investigador Colaborador",
+                    description: "Co-autoría de un artículo o publicación con un investigador de otro país.",
+                    xp: 120,
+                    category: "Investigación",
+                    badgeUrl: "/assets/badges/investigador.jpeg"
+                },
+                {
+                    id: "comunicador-bilingue",
+                    name: "Comunicador Bilingüe",
+                    description: "Demostrar competencias en un segundo idioma a través de certificaciones o participaciones.",
+                    xp: 80,
+                    category: "Currículo",
+                    badgeUrl: "/assets/badges/comunicador_bilingue.jpeg"
+                },
+                {
+                    id: "constructor-puentes",
+                    name: "Constructor de Puentes Culturales",
+                    description: "Participar en un proyecto COIL o evento de intercambio cultural.",
+                    xp: 100,
+                    category: "Currículo",
+                    badgeUrl: "/assets/badges/constructor_puentes.jpeg"
+                },
+                {
+                    id: "lider-innovacion",
+                    name: "Líder de Innovación Global",
+                    description: "Liderar o participar en un proyecto de innovación con impacto internacional.",
+                    xp: 150,
+                    category: "Investigación",
+                    badgeUrl: "/assets/badges/lider_innovacion.jpeg"
+                },
+                {
+                    id: "embajador-nunista",
+                    name: "Embajador Nuñista",
+                    description: "Realizar una estancia académica o representar a la universidad en un evento internacional.",
+                    xp: 200,
+                    category: "Movilidad",
+                    badgeUrl: "/assets/badges/embajador.jpeg"
+                }
+            ];
+
+            console.log(`Iniciando la actualización de ${missions.length} misiones...`);
+            const batch = db.batch();
+
+            missions.forEach(mission => {
+                const docRef = db.collection("missions").doc(mission.id);
+                // Usamos set con merge:true para crear o actualizar sin borrar campos existentes.
+                batch.set(docRef, mission, { merge: true }); 
+                console.log(`- Preparando misión: ${mission.name}`);
+            });
+
+            try {
+                await batch.commit();
+                const successMsg = "¡Éxito! La base de datos ha sido actualizada con las URLs de imagen correctas.";
+                console.log(successMsg);
+                alert(successMsg + " Ya puedes cerrar esta pestaña y refrescar la página de insignias.");
+            } catch (error) {                
+                console.error("Error al actualizar las misiones:", error);
+                alert("Hubo un error al actualizar la base de datos. Revisa la consola para más detalles.");
+            }
+        });
+    </script>
+</body>
+</html>

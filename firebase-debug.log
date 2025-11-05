@@ -1,0 +1,38 @@
+[debug] [2025-11-04T21:58:25.335Z] ----------------------------------------------------------------------
+[debug] [2025-11-04T21:58:25.337Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/f77kilzcw5hh2gidh22k6pj8cp7pxp7h-firebase-tools-14.22.0/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy --only hosting --project mision-global-uninunez-qa
+[debug] [2025-11-04T21:58:25.337Z] CLI Version:   14.22.0
+[debug] [2025-11-04T21:58:25.337Z] Platform:      linux
+[debug] [2025-11-04T21:58:25.337Z] Node Version:  v20.19.1
+[debug] [2025-11-04T21:58:25.337Z] Time:          Tue Nov 04 2025 21:58:25 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-11-04T21:58:25.338Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-04T21:58:25.584Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-04T21:58:25.585Z] > authorizing via signed-in user (maybelline.castro@campusuninunez.edu.co)
+[debug] [2025-11-04T21:58:25.585Z] [iam] checking project mision-global-uninunez-qa for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-11-04T21:58:25.586Z] No OAuth tokens found
+[debug] [2025-11-04T21:58:25.586Z] No OAuth tokens found
+[debug] [2025-11-04T21:58:25.586Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-04T21:58:25.587Z] > authorizing via signed-in user (maybelline.castro@campusuninunez.edu.co)
+[debug] [2025-11-04T21:58:25.588Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mision-global-uninunez-qa:testIamPermissions [none]
+[debug] [2025-11-04T21:58:25.588Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mision-global-uninunez-qa:testIamPermissions x-goog-quota-user=projects/mision-global-uninunez-qa
+[debug] [2025-11-04T21:58:25.588Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mision-global-uninunez-qa:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-11-04T21:58:25.813Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mision-global-uninunez-qa:testIamPermissions 200
+[debug] [2025-11-04T21:58:25.813Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mision-global-uninunez-qa:testIamPermissions {}
+[debug] [2025-11-04T21:58:25.814Z] [iam] error while checking permissions, command may fail: Authorization failed. This account is missing the following required permissions on project mision-global-uninunez-qa:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-11-04T21:58:25.815Z] No OAuth tokens found
+[debug] [2025-11-04T21:58:25.815Z] No OAuth tokens found
+[debug] [2025-11-04T21:58:25.815Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-04T21:58:25.815Z] > authorizing via signed-in user (maybelline.castro@campusuninunez.edu.co)
+[debug] [2025-11-04T21:58:25.815Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mision-global-uninunez-qa [none]
+[debug] [2025-11-04T21:58:26.033Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mision-global-uninunez-qa 403
+[debug] [2025-11-04T21:58:26.033Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mision-global-uninunez-qa {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-11-04T21:58:26.035Z] Request to https://firebase.googleapis.com/v1beta1/projects/mision-global-uninunez-qa had HTTP Error: 403, The caller does not have permission
+[debug] [2025-11-04T21:58:26.035Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/mision-global-uninunez-qa had HTTP Error: 403, The caller does not have permission
+    at responseToError (/nix/store/f77kilzcw5hh2gidh22k6pj8cp7pxp7h-firebase-tools-14.22.0/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/nix/store/f77kilzcw5hh2gidh22k6pj8cp7pxp7h-firebase-tools-14.22.0/lib/node_modules/firebase-tools/lib/apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project mision-global-uninunez-qa. Please make sure the project exists and your account has permission to access it.
